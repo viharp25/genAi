@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Fun Facts Generator</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://images.unsplash.com/photo-1464802686167-b939a6910659?ixlib=rb-1.2.1&auto=format&fit=crop&w=2093&q=80');
+            /* New Unsplash URL */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            /* Semi-transparent background */
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        #fact-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #ffcc00;
+            min-height: 60px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0077cc;
+        }
+
+        #copy-btn {
+            background-color: #4CAF50;
+        }
+
+        #copy-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Space Fun Facts!</h1>
+        <div id="fact-display">Click the button to see a fun fact about space!</div>
+        <button id="generate-btn" onclick="generateFact()">Generate Another Fun Fact</button>
+        <button id="copy-btn" onclick="copyFact()">Copy Fact</button>
+    </div>
+
+    <script>
+        // Array of space-related fun facts
+        const facts = [
+            "Space is completely silent because there is no air to carry sound waves.",
+            "A day on Venus is longer than a year on Venus!",
+            "Neutron stars are so dense that a sugar-cube-sized amount of material from one would weigh a billion tons.",
+            "The footprints left by Apollo astronauts on the Moon will remain there for millions of years.",
+            "One million Earths could fit inside the Sun!",
+            "Jupiter has the most moons of any planet in our solar system, with over 90 discovered so far.",
+            "A spoonful of a neutron star would weigh about a billion tons.",
+            "There is a giant water cloud in space containing 140 trillion times the amount of water in Earth's oceans.",
+            "Mars has the tallest volcano in the solar system, Olympus Mons, which is three times the height of Mount Everest.",
+            "Saturn's moon Titan has lakes of liquid methane and ethane on its surface."
+        ];
+
+        // Function to generate a random fact
+        function generateFact() {
+            const factDisplay = document.getElementById('fact-display');
+            const generateBtn = document.getElementById('generate-btn');
+            const randomIndex = Math.floor(Math.random() * facts.length);
+
+            // Simulate loading for better UX
+            factDisplay.textContent = "Generating...";
+            generateBtn.disabled = true;
+
+            setTimeout(() => {
+                factDisplay.textContent = facts[randomIndex];
+                generateBtn.disabled = false;
+            }, 1000); // 1-second delay
+        }
+
+        // Function to copy the fact to the clipboard
+        function copyFact() {
+            const factDisplay = document.getElementById('fact-display');
+            const factText = factDisplay.textContent;
+
+            if (factText && !factText.includes("Click") && !factText.includes("Generating")) {
+                navigator.clipboard.writeText(factText)
+                    .then(() => alert("Fact copied to clipboard!"))
+                    .catch(() => alert("Failed to copy fact."));
+            } else {
+                alert("No fact to copy!");
+            }
+        }
+    </script>
+</body>
+
+</html>
