@@ -1,0 +1,2 @@
+# genAi
+genai certification exercise
